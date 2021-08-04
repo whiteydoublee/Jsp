@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>2_3_Loop</title>
-<%--
+	<%--
 	날짜 : 2021/08/04
 	이름: 김예은
 	내용 : JSP 반복문 실습하기 
