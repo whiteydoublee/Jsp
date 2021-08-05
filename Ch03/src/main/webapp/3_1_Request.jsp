@@ -4,6 +4,25 @@
 <head>
 	<meta charset="UTF-8">
 	<title>3_1_Request</title>
+	<!-- 
+		날짜: 2021/08/04
+		이름: 김예은
+		내용: JSP request 내장객체 실습하기
+		
+		request 내장 객체
+		 - 클라이언트의 요청 정보를 갖는 객체
+		 - 클라이언트의 전송 데이터 (Parameter)를 수신 기능 제공 
+		
+		Get 전송방식 
+		 - 기본 데이터 전송 방식
+		 - 서버에 페이지나 데이터를 요청하는 전송방식 
+		 - 데이터 주소에 노출
+		
+		Post 전송방식
+		 - 서버에 데이터를 전달하면서 처리를 요청하는 전송방식
+		 - 전송 데이터를 요청 메시지에 삽입하여 전송하므로 데이터를 노출시키지 않음
+	
+	 -->
 </head>
 <body>
 	<h3>1. JSP request 객체</h3>
@@ -73,6 +92,40 @@
 			</tr>
 		</table>
 	</form>
+	
+	<table border="1">
+		<tr>
+			<td>헤더정보</td>
+			<td><%= request.getHeader("User-Agent") %></td>
+		</tr>
+		
+		<tr>
+			<td>통신규약</td>
+			<td><%= request.getProtocol() %></td>
+		</tr>
+		
+		<tr>
+			<td>서버이름</td>
+			<td><%= request.getServerName() %></td>
+		</tr>
+		
+		<tr>
+			<td>요청주소</td>
+			<td><%= request.getRequestURL() %></td>
+		</tr>
+		
+		<tr>
+			<td>요청경로</td>
+			<td><%= request.getRequestURI() %></td>
+		</tr>
+		
+		<tr>
+			<td>클라이언트 시스템 IP</td>
+			<td><%= request.getRemoteAddr()%></td>
+		</tr>
+		
+		
+	</table>
 	
 </body>
 </html>
