@@ -11,7 +11,7 @@
 	--%>
 </head>
 <body>
-	<h3>1. JSP Insert 실습하기 </h3>
+	<h3>1. JSP Insert 실습하기 </h3>	
 	
 	<h4>User 등록</h4>
 	<form action="./proc/insertProc.jsp" method="post">
