@@ -1,3 +1,5 @@
+<%@page import="kr.co.jboard1.db.Sql"%>
+<%@page import="kr.co.jboard1.db.DBConfig"%>
 <%@page import="com.google.gson.JsonObject"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -9,21 +11,14 @@
 	String hp = request.getParameter("hp");
 	
 	int result=0;
-	// DB
-	String host = "jdbc:mysql://54.180.160.240:3306/yeeunkim0701";
-	String user = "yeeunkim0701";
-	String pass = "1234";
 	
 	try{
-		//1단계
-		Class.forName("com.mysql.jdbc.Driver");
-		
-		//2단계
-		Connection conn = DriverManager.getConnection(host,user,pass);
+		//1,2단계
+				Connection conn = DBConfig.getInstance().getConnection();
 		
 		//3단계
-		String sql="SELECT COUNT(`hp`) FROM `member` WHERE `hp`=?;";
-		PreparedStatement pmst = conn.prepareStatement(sql);
+		
+		PreparedStatement pmst = conn.prepareStatement(Sql.SELECT_COUNT_HP);
 		pmst.setString(1, hp);
 		
 		//4단계
