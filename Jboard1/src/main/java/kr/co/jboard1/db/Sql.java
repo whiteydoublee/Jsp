@@ -18,6 +18,16 @@ public class Sql {
 							 + "`regip`=?,"
 							 + "`rdate`=NOW();"; // NOW():함수 
 	//게시판 관련
+	//8/17
+	public static final String SELECT_COUNT_TOTAL="SELECT COUNT(`seq`) FROM `article`;";
+	
+	public static final String SELECT_ARTICLES	="SELECT a.*, b.nick FROM `article` AS a "
+												+ "JOIN `member` AS b "
+												+ "ON a.uid = b.uid "
+												+ "ORDER BY `seq` DESC "
+												+ "LIMIT ?,10;";
+										
+	
 	public static final String SELECT_MAX_SEQ = "SELECT MAX(`seq`) FROM `article`;";
 	public static final String INSERT_ARTICLE = "INSERT INTO `article` SET "
 			+"`title`=?,"
@@ -38,6 +48,8 @@ public class Sql {
 	public static final String SELECT_COUNT_NICK="SELECT COUNT(`nick`) FROM `member` WHERE `nick`=?;";
 	public static final String SELECT_COUNT_EMAIL = "SELECT COUNT(`email`) FROM `member` WHERE `email`=?;";
 	public static final String SELECT_COUNT_HP="SELECT COUNT(`hp`) FROM `member` WHERE `hp`=?;";
+	
+	//
 	
 	
 	
