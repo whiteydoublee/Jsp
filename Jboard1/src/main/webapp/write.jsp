@@ -1,6 +1,7 @@
 <%@page import="kr.co.jboard1.bean.MemberBean"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+	//session check:  로그인 했는지 안 햇는지 
 	MemberBean mb= (MemberBean) session.getAttribute("sessMember");
 
 	//null checking
@@ -8,7 +9,9 @@
 		// 로그인을 하지 않고 list 페이지를 요청했을 때 
 		response.sendRedirect("/Jboard1/user/login.jsp?success=103");
 		return; //프로그램의 종료 시점을 return 키워드로 종료 
-	}	
+	}
+	request.setCharacterEncoding("UTF-8");
+	String pg = request.getParameter("pg");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +45,7 @@
                         </tr>
                     </table>
                     <div>
-                        <a href="/Jboard1/list.jsp" class="btnCancel">취소</a>
+                        <a href="/Jboard1/list.jsp?pg=<%=pg %>" class="btnCancel">취소</a>
                         <input type="submit"  class="btnWrite" value="작성완료">
                     </div>
                 </form>

@@ -101,6 +101,6 @@
 		
 	}
 
-	response.sendRedirect("/Jboard1/list.jsp?pg=1");
+	response.sendRedirect("/Jboard1/list.jsp");
 	
 %>

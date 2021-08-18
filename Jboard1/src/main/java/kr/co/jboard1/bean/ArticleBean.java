@@ -17,6 +17,16 @@ public class ArticleBean {
 	//추가필드
 	private String nick;
 	
+	//FileBean을 추가멤버로 선언(따로만든 이유: 이름이 겹쳐서), getter&setter 추가해야함. 
+	private FileBean fb;
+	
+	public FileBean getFb() {
+		return fb;
+	}
+	public void setFb(FileBean fb) {
+		this.fb = fb;
+	}
+	
 	public String getNick() {
 		return nick;
 	}
@@ -35,6 +45,10 @@ public class ArticleBean {
 	public void setParent(int parent) {
 		this.parent = parent;
 	}
+	//setter를 복사하여 오버로드함 (int->string으로 타입벼환이 불가)
+		public void setParent(String parent) {
+			this.parent = Integer.parseInt(parent);
+		}
 	public int getComment() {
 		return comment;
 	}

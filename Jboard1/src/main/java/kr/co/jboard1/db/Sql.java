@@ -18,15 +18,27 @@ public class Sql {
 							 + "`regip`=?,"
 							 + "`rdate`=NOW();"; // NOW():함수 
 	//게시판 관련
+	//8/18
+	public static final String SELECT_ARTICLE = "SELECT * FROM `article` AS a "
+												+ "LEFT JOIN `Jboard_file` AS b "
+												+ "ON a.seq = b.parent "
+												+ "WHERE `seq`=?;";
 	//8/17
-	public static final String SELECT_COUNT_TOTAL="SELECT COUNT(`seq`) FROM `article`;";
+	public static final String SELECT_COUNT_TOTAL="SELECT COUNT(`seq`) FROM `article` WHERE `parent`=0;";
 	
 	public static final String SELECT_ARTICLES	="SELECT a.*, b.nick FROM `article` AS a "
 												+ "JOIN `member` AS b "
 												+ "ON a.uid = b.uid "
+												+ "WHERE `parent`=0 "
 												+ "ORDER BY `seq` DESC "
 												+ "LIMIT ?,10;";
-										
+	
+	//8/18
+	public static final String SELECT_COMMENTS = "SELECT a.*, b.nick FROM `article` AS a "
+												+ "JOIN `member` AS b "
+												+ "ON a.uid = b.uid "
+												+ "WHERE `parent`=? "
+												+ "ORDER BY `seq` ASC ";
 	
 	public static final String SELECT_MAX_SEQ = "SELECT MAX(`seq`) FROM `article`;";
 	public static final String INSERT_ARTICLE = "INSERT INTO `article` SET "
@@ -42,6 +54,13 @@ public class Sql {
 											+"`oriName`=?,"
 											+"`newName`=?,"
 											+"`rdate`=NOW();";
+	//댓글
+		public static final String INSERT_COMMENT="INSERT INTO `article` SET "
+													+ "`parent`=?,"
+													+ "`content`=?,"	
+													+ "`uid`=?,"
+													+ "`regip`=?,"
+													+ "`rdate`=NOW();";
 											
 	
 	public static final String SELECT_COUNT_UID="SELECT COUNT(`uid`) FROM `member` WHERE `uid`=?;"; // count 쿼리(있는 숫자만큼 나타내주므로 count를 씀.)
@@ -49,7 +68,10 @@ public class Sql {
 	public static final String SELECT_COUNT_EMAIL = "SELECT COUNT(`email`) FROM `member` WHERE `email`=?;";
 	public static final String SELECT_COUNT_HP="SELECT COUNT(`hp`) FROM `member` WHERE `hp`=?;";
 	
-	//
+	//8/18조회수
+	public static final String UPDATE_ARTICLE_HIT="UPDATE `article` SET `hit` =`hit`+1 "
+													+"WHERE `seq`=?;";
+	
 	
 	
 	
