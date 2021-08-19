@@ -15,15 +15,16 @@ import kr.co.jboard1.db.Sql;
 public class ArticleDao {
 	
 	
-	//싱글톤 객체 생성 
+	//싱글톤 객체 생성 : 싱글톤은 객체가 1개만 생성되어야할때 사용됨 (constructor: private, method: static)
 	private static ArticleDao instance = new ArticleDao();
 	
 	public static ArticleDao getInstance() {
 		return instance;
 	} // 메서드 
 	
-	private ArticleDao() {} // 생성자
+	private ArticleDao() {}
 	
+	// Method
 	public int selectCountTotal() {
 			
 		int total=0;
@@ -53,6 +54,7 @@ public class ArticleDao {
 		}
 		return total;
 	}
+	
 	// view scriptlet
 	public ArticleBean selectArticle(String seq){
 		ArticleBean ab = null;
@@ -252,10 +254,78 @@ public class ArticleDao {
 			psmt.close();
 			
 			}catch(Exception e){
-				
+				e.printStackTrace();
 			}
 	}
+	public void updateArticleCommentCount(String parent, int type) {
+		try {
+			//1,2단계
+			Connection conn = DBConfig.getInstance().getConnection();
+			
+			//3단계
+			
+			PreparedStatement psmt = null;
+			if (type >0) {
+				psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT);
+			}else {
+				psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE_COMMENT_MINUS);
+			}
+			psmt.setString(1, parent);
+			
+			//4단계
+			psmt.executeUpdate();
+			
+			//5단계
+			conn.close();
+			psmt.close();
+			//6단계
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public int updateComment(String content, String seq) {
+		
+		int result=0;
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_COMMENT);
+			psmt.setString(1, content);
+			psmt.setString(2, seq);
+			
+			result = psmt.executeUpdate(); // 리턴값 사용 
+			psmt.close();
+			conn.close();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public void deleteArticle() {}
+	public void deleteComment(String seq) {
+		
+		try{
+			//1,2단계
+			Connection conn = DBConfig.getInstance().getConnection();
+			
+			//3단계
+			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_COMMENT);
+			psmt.setString(1, seq);
+			
+			//4단계
+			psmt.executeUpdate();
+			
+			//5단계
+			//6단계
+			psmt.close();
+			conn.close();
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 	
 	
 	

@@ -1,5 +1,5 @@
 package kr.co.jboard1.bean;
-
+//DB에 있는 'article'의 요소들에 대한 클래스 
 public class ArticleBean {
 	
 	private int seq;

@@ -18,6 +18,9 @@
 	//댓글 등록하기
 	ArticleDao.getInstance().insertComment(ab);
 	
+	//댓글수 조회
+	ArticleDao.getInstance().updateArticleCommentCount(parent,+1);
+	
 	//리다이렉트
 	response.sendRedirect("/Jboard1/view.jsp?seq="+parent);
 	

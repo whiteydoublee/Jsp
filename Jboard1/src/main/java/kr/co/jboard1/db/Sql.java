@@ -42,13 +42,13 @@ public class Sql {
 	
 	public static final String SELECT_MAX_SEQ = "SELECT MAX(`seq`) FROM `article`;";
 	public static final String INSERT_ARTICLE = "INSERT INTO `article` SET "
-			+"`title`=?,"
-			+"`content`=?,"
-			+"`file`=?,"
-			+"`uid`=?,"
-			+"`regip`=?,"
-			+"`rdate`=NOW();";
-	
+												+"`title`=?,"
+												+"`content`=?,"
+												+"`file`=?,"
+												+"`uid`=?,"
+												+"`regip`=?,"
+												+"`rdate`=NOW();";
+										
 	public static final String INSERT_FILE = "INSERT INTO `Jboard_file` SET "
 											+"`parent`=?,"
 											+"`oriName`=?,"
@@ -61,6 +61,8 @@ public class Sql {
 													+ "`uid`=?,"
 													+ "`regip`=?,"
 													+ "`rdate`=NOW();";
+		
+		public static final String DELETE_COMMENT = "DELETE FROM `article` WHERE `seq`=?;";
 											
 	
 	public static final String SELECT_COUNT_UID="SELECT COUNT(`uid`) FROM `member` WHERE `uid`=?;"; // count 쿼리(있는 숫자만큼 나타내주므로 count를 씀.)
@@ -71,9 +73,11 @@ public class Sql {
 	//8/18조회수
 	public static final String UPDATE_ARTICLE_HIT="UPDATE `article` SET `hit` =`hit`+1 "
 													+"WHERE `seq`=?;";
+	public static final String UPDATE_ARTICLE_COMMENT = "UPDATE `article` SET `comment` = `comment`+1 WHERE `seq`=?;";
+	public static final String UPDATE_ARTICLE_COMMENT_MINUS = "UPDATE `article` SET `comment` = `comment`-1 WHERE `seq`=?;";
 	
-	
-	
-	
+	public static final String UPDATE_COMMENT ="UPDATE `article` SET `content`=? WHERE `seq`=?;";
+	// content = 바뀐 내용, seq= 댓글 번호 
+
 	
 }

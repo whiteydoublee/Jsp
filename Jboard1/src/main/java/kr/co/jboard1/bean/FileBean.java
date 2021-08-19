@@ -1,5 +1,5 @@
 package kr.co.jboard1.bean;
-
+// 'File'에 대한 클래스 
 public class FileBean {
 	private int fseq;
 	private int parent;

@@ -48,8 +48,9 @@
 	if(groupEnd>lastPageNum){
 		groupEnd=lastPageNum;
 	}
-	
+	//게시물 가져오기 
 	List <ArticleBean> articles = ArticleDao.getInstance().selectArticles(start);
+	
 	
 %>
 

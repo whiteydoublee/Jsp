@@ -1,8 +1,8 @@
-/* 초기화 */
+/* 珥덇린�솕 */
 * {
     margin: 0;
     padding: 0;
-    font: normal 12px '돋움';
+    font: normal 12px '�룍��';
 }
 
 ul, ol {list-style: none;}
@@ -11,7 +11,7 @@ input, textarea {outline: none;}
 body {}
 #wrapper {}
 
-/* 회원-로그인 */
+/* �쉶�썝-濡쒓렇�씤 */
 #user {}
 #user.login {
     width: 360px;
@@ -64,7 +64,7 @@ body {}
     float: right;
 }
 
-/* 회원-약관 */
+/* �쉶�썝-�빟愿� */
 #user.terms {
     width: 600px;
     margin: 60px auto;            
@@ -112,7 +112,7 @@ body {}
 #user.terms > div > a:nth-child(1) {background: #fdfdfd;}
 #user.terms > div > a:nth-child(2) {background: #e9e9e9;}
 
-/* 회원-회원가입 */
+/* �쉶�썝-�쉶�썝媛��엯 */
 #user.register {
     width: 600px;
     height: auto;
@@ -181,7 +181,7 @@ body {}
     color: #111;
 }
 
-/* 게시판 - 공통 */
+/* 寃뚯떆�뙋 - 怨듯넻 */
 #board {
     width: 720px;
     margin: 60px auto;            
@@ -232,7 +232,12 @@ body {}
 #board .btnModify { padding: 8px; border: 1px solid #bebebe; background: #fdfdfd; color: #111;}
 #board .btnList   { padding: 8px; border: 1px solid #bebebe; background: #fdfdfd; color: #111;}
 
-/* 게시판 - 글목록 */
+#board .btnCommentDel   {}
+#board .btnCommentModify   {}
+#board .btnCommentCancel {display:none;}
+
+
+/* 寃뚯떆�뙋 - 湲�紐⑸줉 */
 #board.list {
     position: relative;
 }
@@ -271,7 +276,7 @@ body {}
     bottom: 14px;
     right: 0;
 }
-/* 게시판-글보기 */
+/* 寃뚯떆�뙋-湲�蹂닿린 */
 #board.view > div {
     padding: 16px 0;
     text-align: right;
@@ -322,14 +327,14 @@ body {}
     text-align: right;
 }
 
-/* 게시판-글쓰기 */
+/* 寃뚯떆�뙋-湲��벐湲� */
 #board.write {}
 #board.write form > div {
     margin-top: 10px;
     text-align: right;
 }
 
-/* 게시판-글수정 */
+/* 寃뚯떆�뙋-湲��닔�젙 */
 #board.modify form > div {
     margin-top: 10px;
     text-align: right;

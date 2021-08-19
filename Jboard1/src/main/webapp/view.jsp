@@ -28,7 +28,8 @@
 	
 	//댓글 가져오기 
 	List <ArticleBean> comments=dao.selectComments(seq);
-
+	
+	
 %>
 
 
@@ -38,7 +39,102 @@
     <meta charset="UTF-8">
     <title>글보기</title>
     <link rel="stylesheet" href="./css/style.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    
+    $(document).ready(function(){
+		
+		// 댓글 삭제
+		$('.btnCommentDel').click(function(){
+			var result = confirm('정말 삭제 하시겠습니까?');
+			return result;
+		});
+		
+		var content = '';
+		
+		// 댓글 수정
+		$('.btnCommentModify').click(function(){
+			
+			var tag = $(this);
+			var mode = $(this).text();   
+			
+			var textarea = $(this).parent().prev();
+			
+			if(mode == '수정'){
+				// 수정모드
+				content = textarea.val(); 
+				
+				$(this).prev().css('display', 'none');
+				$(this).next().css('display', 'inline');
+				$(this).text('수정완료');
+				textarea.attr('readonly', false).focus();
+    			textarea.css({
+    				'background': 'white',
+    				'outline': '1px solid gray'
+    			});
+    			
+			}else{
+				// 수정완료 모드
+				
+				var seq     = textarea.attr('data-seq');
+				var comment = textarea.val(); 
+				
+				var jsonData = {
+						'seq': seq,
+						'comment': comment
+					};
+				
+				$.ajax({
+					url: '/Jboard1/proc/updateComment.jsp',
+					type: 'post',
+					data: jsonData,   // 서버로 전송하는 데이터(JSON) 지정
+					dataType: 'json', // 서버로 부터 전달되는 데이터 종류
+					success: function(data){
+						if(data.result == 1){
+							alert('댓글 수정이 성공 했습니다.');
+							
+							//수정모드 
+							tag.prev().text('수정');
+							tag.next().css('display', 'inline');
+							tag.css('display', 'none');
+							
+							textarea.attr('readonly', true);
+							textarea.css({
+								'background': 'transparent',
+								'outline': 'none'
+							});
+							
+						}else{
+							alert('댓글 수정이 실패 했습니다.');
+						}
+					}
+				});
+			}//
+			return false;
+		});
+		
+		// 댓글 수정 취소
+		$('.btnCommentCancel').click(function(e){
+			e.preventDefault();
+			
+			$(this).prev().text('수정');
+			$(this).prev().prev().css('display', 'inline');
+			$(this).css('display', 'none');
+			
+			var textarea = $(this).parent().prev();
+			
+			textarea.val(content);
+			textarea.attr('readonly', true);
+			textarea.css({
+				'background': 'transparent',
+				'outline': 'none'
+			});    			
+		});
+	});
+		
+	</script>
 </head>
+
 <body>
     <div id="wrapper">
         <section id="board" class="view">
@@ -66,9 +162,12 @@
                 </tr>
             </table>
             <div>
+            <%if (mb.getUid().equals(article.getUid())){ %>
                 <a href="#" class="btnDelete">삭제</a>
                 <a href="/Jboard1/modify.jsp" class="btnModify">수정</a>
+                <% }%>
                 <a href="/Jboard1/list.jsp" class="btnList">목록</a>
+            
             </div>  
             
             <!-- 댓글리스트 -->
@@ -81,11 +180,15 @@
                         <span><%= comment.getNick() %></span>
                         <span><%= comment.getRdate().substring(2,10) %></span>
                     </span>
-                    <textarea name="comment" readonly><%= comment.getContent() %></textarea>
+                    <textarea name="comment" readonly data-seq ="<%= comment.getSeq() %>"><%= comment.getContent() %></textarea>
+                    <!-- 사용자정의 속성:data-이름 ="데이터"  -->
+                    <%if (mb.getUid().equals(comment.getUid())){//본인이 쓴 글이 맞으면 %>
                     <div>
-                        <a href="#">삭제</a>
-                        <a href="#">수정</a>
+                        <a href="/Jboard1/proc/deleteComment.jsp?parent=<%= comment.getParent() %>&seq=<%= comment.getSeq()%>" class ="btnCommentDel">삭제</a>
+                        <a href="#" class = "btnCommentModify">수정</a>
+                        <a href="#" class = "btnCommentCancel">취소</a>
                     </div>
+                    <%} %>
                 </article>
                 <%} %>
                 
@@ -99,7 +202,9 @@
                 <h3>댓글쓰기</h3>
                 <form action="/Jboard1/proc/commentProc.jsp" method="post">
                     <input type="hidden" name="parent" value="<%= article.getSeq() %>" />
-                    <input type="hidden" name="uid" value="<%= article.getUid() %>" />
+                    <input type="hidden" name="uid" value="<%= mb.getUid() %>" />
+                    <!-- 글쓴 사람의 아이디는 로그인한 사람이어야하기 때문에 로그인한 사람의 정보를 담고 있는 mb 객체를 사용해주어야함
+                    a tag: inline tag (글자 제한 O) -->
                     
                     <textarea name="content"></textarea>
                     
