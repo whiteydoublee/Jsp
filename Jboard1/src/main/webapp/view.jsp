@@ -50,14 +50,14 @@
 			return result;
 		});
 		
+		
 		var content = '';
 		
 		// 댓글 수정
 		$('.btnCommentModify').click(function(){
 			
 			var tag = $(this);
-			var mode = $(this).text();   
-			
+			var mode = $(this).text();    			    			
 			var textarea = $(this).parent().prev();
 			
 			if(mode == '수정'){
@@ -93,30 +93,28 @@
 						if(data.result == 1){
 							alert('댓글 수정이 성공 했습니다.');
 							
-							//수정모드 
-							tag.prev().text('수정');
-							tag.next().css('display', 'inline');
-							tag.css('display', 'none');
-							
-							textarea.attr('readonly', true);
-							textarea.css({
-								'background': 'transparent',
-								'outline': 'none'
-							});
-							
+							// 수정모드 해제
+							tag.text('수정');
+							tag.prev().css('display', 'inline');
+							tag.next().css('display', 'none');    			    			    							
+			    			textarea.attr('readonly', true);
+			    			textarea.css({
+			    				'background': 'transparent',
+			    				'outline': 'none'
+			    			});
+			    			
 						}else{
 							alert('댓글 수정이 실패 했습니다.');
 						}
 					}
 				});
-			}//
+			}
 			return false;
 		});
 		
 		// 댓글 수정 취소
 		$('.btnCommentCancel').click(function(e){
 			e.preventDefault();
-			
 			$(this).prev().text('수정');
 			$(this).prev().prev().css('display', 'inline');
 			$(this).css('display', 'none');
@@ -128,8 +126,10 @@
 			textarea.css({
 				'background': 'transparent',
 				'outline': 'none'
-			});    			
+			});	
 		});
+		
+		
 	});
 		
 	</script>
