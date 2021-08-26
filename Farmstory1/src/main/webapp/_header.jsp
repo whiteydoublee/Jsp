@@ -1,5 +1,9 @@
+<%@page import="kr.co.farmstory1.bean.MemberBean"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%
+	// 로그인에 관한 객체는 session****
+	MemberBean mb = (MemberBean) session.getAttribute("sessMember");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,8 +17,12 @@
             <a href="/Farmstory1" class="logo"><img src="/Farmstory1/img/logo.png" alt="로고"></a>
             <p>
                 <a href="/Farmstory1">HOME |</a>
-                <a href="/Farmstory1/user/login.jsp">Login |</a>
-                <a href="/Farmstory1/user/terms.jsp">Join |</a>
+                <%if(mb==null){//로그인이 되어 있지 않으면의 조건  %> 
+	                <a href="/Farmstory1/user/login.jsp">Login |</a>
+	                <a href="/Farmstory1/user/terms.jsp">Join |</a>
+	            <%} else{ %>
+                <a href="/Farmstory1/user/logout.jsp">Logout |</a>
+                <%} %>
                 <a href="/Farmstory1/community/qna.jsp">Contact us</a>
             </p>
 
