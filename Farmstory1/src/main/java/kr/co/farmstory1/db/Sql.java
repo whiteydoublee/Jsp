@@ -26,6 +26,10 @@ public class Sql {
 	//8/17
 	public static final String SELECT_COUNT_TOTAL="SELECT COUNT(`seq`) FROM `article` WHERE `parent`=0;";
 	
+	public static final String SELECT_LATEST = "SELECT `seq`,`title`,`rdate` FROM `article`"
+												+ "WHERE `cate`=? AND `parent`=0 "
+												+ "ORDER BY `seq` DESC LIMIT 5;";
+	
 	public static final String SELECT_ARTICLES	="SELECT a.*, b.nick FROM `article` AS a "
 												+ "JOIN `member` AS b "
 												+ "ON a.uid = b.uid "
@@ -42,6 +46,7 @@ public class Sql {
 	
 	public static final String SELECT_MAX_SEQ = "SELECT MAX(`seq`) FROM `article`;";
 	public static final String INSERT_ARTICLE = "INSERT INTO `article` SET "
+												+ "`cate`=?,"
 												+"`title`=?,"
 												+"`content`=?,"
 												+"`file`=?,"

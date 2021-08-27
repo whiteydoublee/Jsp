@@ -35,14 +35,16 @@
 
              <!--컨텐츠내용 시작-->
               <%if(mode.equals("l")){ %>
-             	<jsp:include page="../board/list.jsp"/>
-             <%}else if(mode.equals("w")){ %>
-             	<jsp:include page="../board/write.jsp"/>
-             <%}else if( mode.equals("v")){ %>
-             	<jsp:include page="../board/view.jsp"/>
-             <%}else if (mode.equals("m")){ %>
-             	<jsp:include page="../board/modify.jsp"/>
-             <%} %>
+               	<jsp:include page="../board/list.jsp"/>
+               <%}else if(mode.equals("w")){ %>
+               	<jsp:include page="../board/write.jsp">
+            		<jsp:param name="uid" value="<%= mb.getUid() %>"/>
+            	</jsp:include>
+               <%}else if( mode.equals("v")){ %>
+               	<jsp:include page="../board/view.jsp"/>
+               <%}else if (mode.equals("m")){ %>
+               	<jsp:include page="../board/modify.jsp"/>
+               <%} %>
 
              <!--컨텐츠내용 끝-->
          </article>

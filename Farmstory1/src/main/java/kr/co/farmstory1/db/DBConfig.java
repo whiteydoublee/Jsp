@@ -16,9 +16,11 @@ public class DBConfig {
 	}
 	
 	//DB ���� (FINAL ����� �Ǹ� �̸��� �빮�ڸ� ���)
-	private final String  HOST = "jdbc:mysql://3.36.92.8:3306/yeeunkim0701";
+	
+	//private final String  HOST = "jdbc:mysql://3.36.92.8:3306/yeeunkim0701";
+	private final String  HOST = "jdbc:mysql://54.180.160.240:3306/yeeunkim0701";
 	private final String  USER = "yeeunkim0701";
-	private final String  PASS = "fngksqkqh*23";
+	private final String  PASS = "1234";
 	
 	public Connection getConnection() throws ClassNotFoundException, SQLException {
 		//1�ܰ� - JDBC Driver �ε�

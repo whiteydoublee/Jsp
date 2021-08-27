@@ -29,7 +29,7 @@
                     </nav>
 
                     <!--컨텐츠내용 시작-->
-                     <%if(mode.equals("l")){ %>
+               <%if(mode.equals("l")){ %>
                	<jsp:include page="../board/list.jsp"/>
                <%}else if(mode.equals("w")){ %>
                	<jsp:include page="../board/write.jsp"/>

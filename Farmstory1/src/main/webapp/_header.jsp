@@ -1,9 +1,10 @@
 <%@page import="kr.co.farmstory1.bean.MemberBean"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	// 로그인에 관한 객체는 session****
+	// 로그인에 관한 객체는 session 
 	MemberBean mb = (MemberBean) session.getAttribute("sessMember");
 %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -55,6 +55,37 @@ public class ArticleDao {
 		return total;
 	}
 	
+	public List<ArticleBean> selectLatest(String cate) {
+		List<ArticleBean> latests = new ArrayList<>();
+		
+		try {
+			
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt= conn.prepareStatement(Sql.SELECT_LATEST);
+			psmt.setString(1, cate);
+			ResultSet rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ArticleBean article = new ArticleBean();
+				article.setSeq(rs.getInt(1));
+				article.setTitle(rs.getString(2));
+				article.setRdate(rs.getString(3));
+				
+				latests.add(article);
+			
+			}
+			
+			psmt.close();
+			conn.close();
+			rs.close();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return latests;
+	}
+	
 	// view scriptlet
 	public ArticleBean selectArticle(String seq){
 		ArticleBean ab = null;
@@ -208,7 +239,27 @@ public class ArticleDao {
 		
 	}
 	
-	public void insertArticle() {}
+	public void insertArticle(ArticleBean article) {
+		
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_ARTICLE);
+			psmt.setString(1, article.getCate());
+			psmt.setString(2, article.getTitle());
+			psmt.setString(3, article.getContent());
+			psmt.setInt(4, article.getFile());
+			psmt.setString(5, article.getUid());
+			psmt.setString(6, article.getRegip());
+			
+			psmt.executeUpdate();
+			
+			psmt.close();
+			conn.close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public void insertComment(ArticleBean ab) {
 		
 		try{

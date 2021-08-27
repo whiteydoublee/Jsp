@@ -16,9 +16,9 @@
            <aside>
                <img src="../img/sub_aside_cate3_tit.png" alt="농작물이야기">
                <ul>
-                   <li class="on"><a href="./story.html">농작물이야기</a></li>
-                   <li><a href="./grow.html">텃밭가꾸기</a></li>
-                   <li><a href="./school.html">귀농학교</a></li>
+                   <li class="on"><a href="./story.jsp">농작물이야기</a></li>
+                   <li><a href="./grow.jsp">텃밭가꾸기</a></li>
+                   <li><a href="./school.jsp">귀농학교</a></li>
                </ul>
 
            </aside>
@@ -31,10 +31,12 @@
                </nav>
 
                <!--컨텐츠내용 시작-->
-               <%if(mode.equals("l")){ %>
+                <%if(mode.equals("l")){ %>
                	<jsp:include page="../board/list.jsp"/>
                <%}else if(mode.equals("w")){ %>
-               	<jsp:include page="../board/write.jsp"/>
+               	<jsp:include page="../board/write.jsp">
+            		<jsp:param name="uid" value="<%= mb.getUid() %>"/>
+            	</jsp:include>
                <%}else if( mode.equals("v")){ %>
                	<jsp:include page="../board/view.jsp"/>
                <%}else if (mode.equals("m")){ %>

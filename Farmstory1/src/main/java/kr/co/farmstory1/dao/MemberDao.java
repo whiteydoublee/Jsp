@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import kr.co.farmstory1.bean.MemberBean;
+import kr.co.farmstory1.bean.TermsBean;
 import kr.co.farmstory1.db.DBConfig;
 import kr.co.farmstory1.db.Sql;
 
@@ -19,6 +20,16 @@ public class MemberDao {
 	private MemberDao() {}
 	
 	public void insertMember(){}
+	
+	public TermsBean selectTerms() {
+		return null;
+	}
+	
+	public int selectCountUserInfo(int type) {
+		return 0;
+	}
+	
+	
 	public MemberBean selectMember(String uid, String pass){
 			
 		MemberBean mb = null;
