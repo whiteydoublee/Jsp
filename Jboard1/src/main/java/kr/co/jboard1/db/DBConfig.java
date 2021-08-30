@@ -16,7 +16,7 @@ public class DBConfig {
 	}
 	
 	//DB 정보 (FINAL 상수가 되면 이름은 대문자를 사용)
-	private final String  HOST = "jdbc:mysql://54.180.160.240:3306/yeeunkim0701";
+	private final String  HOST = "jdbc:mysql://3.36.60.165:3306/yeeunkim0701";
 	private final String  USER = "yeeunkim0701";
 	private final String  PASS = "1234";
 	
