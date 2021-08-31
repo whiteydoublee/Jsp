@@ -36,6 +36,7 @@ public class ArticleDao {
 			
 			//3
 			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_TOTAL);
+			psmt.setString(1, cate);
 			
 			//4
 			ResultSet rs= psmt.executeQuery();
@@ -154,7 +155,8 @@ public class ArticleDao {
 			
 			//3�ܰ�
 			PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_ARTICLES);
-			psmt.setInt(1, start);
+			psmt.setString(1, cate); // 카테고리 값이 있어야, 카테고리에 맞는 글들끼리 묶이게 되므로 카테고리 값을 추가해줘야함 
+			psmt.setInt(2, start);
 			// ? (�Է��ؾ��ϴ� ������ �����Ƿ� )
 			
 			//4�ܰ�

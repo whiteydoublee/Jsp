@@ -24,7 +24,7 @@ public class Sql {
 												+ "ON a.seq = b.parent "
 												+ "WHERE `seq`=?;";
 	//8/17
-	public static final String SELECT_COUNT_TOTAL="SELECT COUNT(`seq`) FROM `article` WHERE `parent`=0;";
+	public static final String SELECT_COUNT_TOTAL="SELECT COUNT(`seq`) FROM `article` WHERE `parent`=0 AND `cate`=?;";
 	
 	public static final String SELECT_LATEST = "SELECT `seq`,`title`,`rdate` FROM `article`"
 												+ "WHERE `cate`=? AND `parent`=0 "
@@ -33,7 +33,7 @@ public class Sql {
 	public static final String SELECT_ARTICLES	="SELECT a.*, b.nick FROM `article` AS a "
 												+ "JOIN `member` AS b "
 												+ "ON a.uid = b.uid "
-												+ "WHERE `parent`=0 "
+												+ "WHERE `parent`=0 AND `cate`=? "
 												+ "ORDER BY `seq` DESC "
 												+ "LIMIT ?,10;";
 	

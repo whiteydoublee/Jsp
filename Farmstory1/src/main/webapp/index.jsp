@@ -8,6 +8,7 @@
 	//최신글 가져오기
 	ArticleDao dao = ArticleDao.getInstance();
 
+	//최신글 ('시퀀스번호	','제목','날짜')
 	List <ArticleBean> latestGrow = dao.selectLatest("grow");
 	List <ArticleBean> latestSchool = dao.selectLatest("school");
 	List <ArticleBean> latestStory = dao.selectLatest("story");
