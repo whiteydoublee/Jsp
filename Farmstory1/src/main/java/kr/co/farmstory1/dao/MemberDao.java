@@ -25,8 +25,40 @@ public class MemberDao {
 		return null;
 	}
 	
-	public int selectCountUserInfo(int type) {
-		return 0;
+	public int selectCountUserInfo(int type, String checkData) {
+		int result =0;
+		
+		try{
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = null;
+			
+			if(type==1) {
+				psmt = conn.prepareStatement(Sql.SELECT_COUNT_UID);
+			}else if (type==2) {
+				psmt = conn.prepareStatement(Sql.SELECT_COUNT_NICK);
+			}else if (type==3) {
+				psmt = conn.prepareStatement(Sql.SELECT_COUNT_EMAIL);
+			}else if (type==4) {
+				psmt=conn.prepareStatement(Sql.SELECT_COUNT_HP);
+			}
+			
+			psmt.setString(1, checkData);
+			
+			ResultSet rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			
+			rs.close();
+			conn.close();
+			psmt.close();
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+		
 	}
 	
 	

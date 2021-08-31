@@ -68,6 +68,7 @@ public class Sql {
 													+ "`rdate`=NOW();";
 		
 		public static final String DELETE_COMMENT = "DELETE FROM `article` WHERE `seq`=?;";
+		public static final String DELETE_ARTICLE = "DELETE FROM `article` WHERE `seq`=?;";
 											
 	
 	public static final String SELECT_COUNT_UID="SELECT COUNT(`uid`) FROM `member` WHERE `uid`=?;"; // count ����(�ִ� ���ڸ�ŭ ��Ÿ���ֹǷ� count�� ��.)
@@ -83,6 +84,11 @@ public class Sql {
 	
 	public static final String UPDATE_COMMENT ="UPDATE `article` SET `content`=? WHERE `seq`=?;";
 	// content = �ٲ� ����, seq= ��� ��ȣ 
+	
+	public static final String UPDATE_ARTICLE = "UPDATE `article` SET "
+												+ "`title`=?, "
+												+ "`content`=?, "
+												+ "WHERE `seq` =?;";
 
 	
 }

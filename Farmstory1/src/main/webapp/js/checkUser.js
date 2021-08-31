@@ -22,7 +22,7 @@ $(document).ready(function(){
 			url: '/Farmstory1/user/proc/checkUid.jsp?uid='+uid,
 			type: 'get',
 			dataType: 'json',
-			success: function(){
+			success: function(data){
 				if(data.result==1){
 					$('.resultId').css('color','red').text('이미 사용중인 아이디 입니다.');
 					isUidOk=false;
@@ -36,7 +36,6 @@ $(document).ready(function(){
 							$('.resultId').css('color','red').text('아이디는 영문 소문자, 숫자 조합 4-10자까지 입니다.');
 							isUidOk = false;
 						}
-						isUidOk=true;
 					}
 			}
 		});
@@ -74,61 +73,65 @@ $(document).ready(function(){
 		
 	});
 	//닉네임 중복체크
-	$('input[name==nick]').focusout(function(){
+	$('input[name=nick]').focusout(function(){
+		
 		var nick = $(this).val();
+		
 		$.ajax({
 			url: '/Farmstory1/user/proc/checkNick.jsp?nick='+nick,
 			type: 'get',
 			dataType: 'json',
 			success: function(data){
-				if(data.result==1){
-					$('.resultNick').css('color','red').text('이미 사용중인 닉네임입니다.');
-					isNickOk=false;
-				}else {
-					if (reNick.test(nick)){
-						$('.resultNick').css('color','green').text('사용가능한 닉네임입니다.');
-						isNickOk=true;
-					}else {
-						$('.resultNick').css('color','red').text('닉네임은 영문,한글, 숫자포함 2~10자 입니다.');
-						isNickOk=false;
+				if(data.result == 1){					    						
+					$('.resultNick').css('color', 'red').text('이미 사용중인 닉네임 입니다.');
+					isNickOk = false;
+				}else{
+					if(reNick.test(nick)){
+						$('.resultNick').css('color', 'green').text('사용 가능한 닉네임 입니다.');
+						isNickOk = true;	
+					}else{
+						$('.resultNick').css('color', 'red').text('닉네임은 영문, 한글, 숫자포함 2 ~ 10자 입니다.');
+						isNickOk = false;
 					}
 				}
-			}
+			}    				
 		});
 	});
 	
 	//이메일 중복 체크 
 	$('input[name=email]').focusout(function(){
+		
 		var email = $(this).val();
+		
 		$.ajax({
-			url:'/Farmstory1/user/proc/checkEmail.jsp?email='+email,
+			url: '/Farmstory1/user/proc/checkEmail.jsp?email='+email,
 			type: 'get',
-			dataType:'json',
+			dataType: 'json',
 			success: function(data){
-				if(data.result==1){
-					$('.resultEmail').css('color','red').text('이미 사용중인 이메일 입니다.');
+				
+				if(data.result == 1){    						
+					$('.resultEmail').css('color', 'red').text('이미 사용중인 이메일 입니다.');
 				}else{
-					$('.resultEmail').css('color','green').text('사용가능한 이메일 입니다.');
+					$('.resultEmail').css('color', 'green').text('사용 가능한 이메일 입니다.');
 				}
-			}
+			}    				
 		});
 	});
 	
 	//휴대전화 중복 체크 
 	$('input[name=hp]').focusout(function(){
-	var hp = $(this).val();
-	$.ajax({
-		url: '/Farmstory1/user/proc/checkHp.jsp?hp='+hp,
-		type: 'get',
-		dataType: 'json',
-		success: function(data){
-			if (data.result==1){
-				$('resultHp').css('color','red').text('이미 사용중인 번호이니다.');
-			}else{
-				$('resultHp').css('color','green').text('사용가능한 번호입니다.');
+		var hp = $(this).val();
+		$.ajax({
+			url: '/Farmstory1/user/proc/checkHp.jsp?hp='+hp,
+			type: 'get',
+			dataType: 'json',
+			success: function(data){
+				if (data.result==1){
+					$('.resultHp').css('color','red').text('이미 사용중인 번호이니다.');
+				}else{
+					$('.resultHp').css('color','green').text('사용가능한 번호입니다.');
+				}
 			}
-		}
+			});
 		});
-	});
-	
 });

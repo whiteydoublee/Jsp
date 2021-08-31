@@ -1,43 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>팜스토리::찾아오시는 길</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <style>
-       
-
-        /*팜스토리소개*/
-
-
-        /*장보기*/
-        /*농작물이야기*/
-        /*이벤트*/
-        /*커뮤니티*/
-    </style>
-</head>
-<body>
-    <div id="wrapper">
-        <header>
-            <a href="#" class="logo"><img src="../img/logo.png" alt="로고"></a>
-            <p>
-                <a href="#">HOME |</a>
-                <a href="#">Login |</a>
-                <a href="#">Join |</a>
-                <a href="#">Contact us</a>
-            </p>
-
-            <img src="../img/head_txt_img.png" alt="3만원 이상 무료배송, 팜카드 10%적립">   
-
-            <ul class="gnb">
-                <li><a href="#">팜스토리 소개</a></li>
-                <li><a href="#"><img src="../img/head_menu_badge.png" class="badge">장보기</a></li>
-                <li><a href="#">농작물 이야기</a></li>
-                <li><a href="#">이벤트</a></li>
-                <li><a href="#">커뮤니티</a></li>
-           </ul>
-        </header>
+<%@ include file ="../_header.jsp" %>
 
     
         <!--마크업 - 모든 페이지의 기본 structure-->
@@ -47,8 +9,8 @@
                 <aside>
                     <img src="../img/sub_aside_cate1_tit2.png" alt="찾아오시는 길">
                     <ul>
-                        <li><a href="./hello.html">인사말</a></li>
-                        <li class="on"><a href="./direction.html">찾아오시는 길</a></li>
+                        <li><a href="./hello.jsp">인사말</a></li>
+                        <li class="on"><a href="./direction.jsp">찾아오시는 길</a></li>
                     </ul>
 
                 </aside>

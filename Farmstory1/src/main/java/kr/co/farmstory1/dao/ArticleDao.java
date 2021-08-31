@@ -3,6 +3,7 @@ package kr.co.farmstory1.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class ArticleDao {
 	private ArticleDao() {}
 	
 	// Method
-	public int selectCountTotal() {
+	public int selectCountTotal(String cate) {
 			
 		int total=0;
 		
@@ -143,7 +144,7 @@ public class ArticleDao {
 	}
 	
 	//list scriptlet
-	public List<ArticleBean> selectArticles (int start) { // start: �Ű����� ����
+	public List<ArticleBean> selectArticles (String cate, int start) { // start: �Ű����� ����
 		
 		List<ArticleBean> articles	= new ArrayList<>();
 		
@@ -239,7 +240,41 @@ public class ArticleDao {
 		
 	}
 	
-	public void insertArticle(ArticleBean article) {
+	public int selectMaxSeq() {
+		int seq = 0;
+		
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(Sql.SELECT_MAX_SEQ);
+			if(rs.next()){
+				seq = rs.getInt(1);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return seq;
+	}
+	
+	public void insertFile(int seq, String oriName, String newName) {
+		
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.INSERT_FILE);
+			psmt.setInt(1, seq);
+			psmt.setString(2, oriName);
+			psmt.setString(3, newName);
+			psmt.executeUpdate();
+			psmt.close();
+			conn.close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public int insertArticle(ArticleBean article) {
 		
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
@@ -259,6 +294,7 @@ public class ArticleDao {
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		return selectMaxSeq();
 	}
 	public void insertComment(ArticleBean ab) {
 		
@@ -286,7 +322,19 @@ public class ArticleDao {
 			}
 	}
 	
-	public void updateArticle() {}
+	public void updateArticle(String title, String content, String seq) {
+		
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE);
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 	public void updateArticleHit(String seq) {
 		try{
 			//1,2�ܰ�
@@ -354,7 +402,23 @@ public class ArticleDao {
 		return result;
 	}
 	
-	public void deleteArticle() {}
+	public void deleteArticle(String seq) {
+		
+		try {
+			Connection conn = DBConfig.getInstance().getConnection();
+			PreparedStatement psmt = conn.prepareStatement(Sql.DELETE_ARTICLE);
+			psmt.setString(1, seq);
+			psmt.executeUpdate();
+			
+			conn.close();
+			psmt.close();
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 	public void deleteComment(String seq) {
 		
 		try{

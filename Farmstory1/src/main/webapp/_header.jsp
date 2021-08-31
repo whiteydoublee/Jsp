@@ -3,6 +3,24 @@
 <%
 	// 로그인에 관한 객체는 session 
 	MemberBean mb = (MemberBean) session.getAttribute("sessMember");
+
+	String success =request.getParameter("success");
+	String mode = request.getParameter("mode");
+	
+	//mode 값은 기본적으로 l(list) 모드값으로 세팅
+	if(mode==null){
+		mode="l";//list mode
+	}
+	
+	// 글쓰기, 글보기, 글 수정은 반드시 로그인을 먼저 해야함
+	if(mode.equals("w")|| mode.equals("v")||mode.equals("m")){
+		if (mb == null){
+			response.sendRedirect("/Farmstory1/user/login.jsp?success=102");
+			return;
+		}
+	}
+	
+
 %>
 
 <!DOCTYPE html>
@@ -11,6 +29,7 @@
     <meta charset="UTF-8">
     <title>팜스토리</title>
     <link rel ="stylesheet" href="/Farmstory1/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
     <div id="wrapper">

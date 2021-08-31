@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="/Jboard1/js/checkUser.js"></script>
+	<script src="/Farmstory1/js/checkUser.js"></script>
     
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="/Jboard1/js/zipcode.js"></script>
-	<script src= "/Jboard1/js/Validation.js"></script>
+	<script src="/Farmstory1/js/zipcode.js"></script>
+	<script src= "/Farmstory1/js/Validation.js"></script>
 
 <%@ include file ="../_header.jsp" %>
    <section id="user" class="register">
@@ -38,7 +38,8 @@
                <tr>
                    <td>이름</td>
                    <td>
-                     <input type="text" name="name" placeholder="이름 입력"/>                            
+                     <input type="text" name="name" placeholder="이름 입력"/>   
+                     <span class = "resultName"></span>                         
                    </td>
                </tr>
                <tr>
@@ -53,12 +54,14 @@
                    <td>E-Mail</td>
                    <td>
                       <input type="email" name="email" placeholder="이메일 입력"/>
+                      <span class="resultEmail"></span>
                    </td>
                </tr>
                <tr>
                    <td>휴대폰</td>
                    <td>
                       <input type="text" name="hp" placeholder="- 포함 13자리 입력" minlength="13" maxlength="13" />
+                      <span class="resultHp"></span>
                    </td>
                </tr>
                <tr>

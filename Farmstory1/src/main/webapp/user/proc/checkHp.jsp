@@ -1,3 +1,4 @@
+<%@page import="kr.co.farmstory1.dao.MemberDao"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="kr.co.farmstory1.db.Sql"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -11,26 +12,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String hp = request.getParameter("hp");
 	
-	int result = 0;
-	
-	try{
-		
-		Connection conn = DBConfig.getInstance().getConnection();
-		PreparedStatement psmt = conn.prepareStatement(Sql.SELECT_COUNT_HP);
-		psmt.setString(1, hp);
-		ResultSet rs = psmt.executeQuery();
-		
-		if (rs.next()){
-			result = rs.getInt(1);
-		}
-		
-		rs.close();
-		conn.close();
-		psmt.close();
-		
-	}catch(Exception e){
-		e.printStackTrace();
-	}
+	int result = MemberDao.getInstance().selectCountUserInfo(4, hp);
 	
 	JsonObject json = new JsonObject();
 	json.addProperty("result", result);
