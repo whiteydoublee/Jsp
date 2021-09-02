@@ -38,8 +38,3 @@
 	            </form>
 	        </article>
 	    </section>
-   	 </article>
- 	</section>
-</div>
-	 
-<%@ include file="../_footer.jsp" %>

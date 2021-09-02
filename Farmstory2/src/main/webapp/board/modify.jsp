@@ -20,7 +20,7 @@
     <section id="board" class="modify">
         <h3>글수정</h3>
         <article>
-            <form action="/Farmstory1/board/proc/modifyProc.jsp" method="post">
+            <form action="/Farmstory2/board/proc/modifyProc.jsp" method="post">
             	<input type="hidden" name="seq" value="<%=seq%>">
             	<input type = "hidden" name="cate" value="<%=cate%>">
             	<input type = "hidden" name="group" value="<%= group%>">
@@ -41,7 +41,7 @@
                     </tr>   -->
                 </table>
                 <div>
-                    <a href="/Farmstory2/board/view.jsp?group=<%=group %>&cate=<%=cate %>" class="btnCancel">취소</a>
+                    <a href="/Farmstory2/board/view.jsp?group=<%=group %>&cate=<%=cate %>&seq=<%=seq %>" class="btnCancel">취소</a>
                     <input type="submit"  class="btnWrite" value="수정완료">
                 </div>
             </form>

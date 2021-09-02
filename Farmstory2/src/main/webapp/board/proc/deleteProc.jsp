@@ -3,9 +3,10 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String seq = request.getParameter("seq");
-	String uri = request.getParameter("uri");
+	String group = request.getParameter("group");
+	String cate = request.getParameter("cate");
 	
 	ArticleDao.getInstance().deleteArticle(seq);
 	
-	response.sendRedirect(uri);
+	response.sendRedirect("/Farmstory2/board/list.jsp?group="+group+"&cate="+cate);
 %>

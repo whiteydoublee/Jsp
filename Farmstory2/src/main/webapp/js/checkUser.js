@@ -108,7 +108,6 @@ $(document).ready(function(){
 			type: 'get',
 			dataType: 'json',
 			success: function(data){
-				
 				if(data.result == 1){    						
 					$('.resultEmail').css('color', 'red').text('이미 사용중인 이메일 입니다.');
 				}else{
@@ -127,7 +126,7 @@ $(document).ready(function(){
 			dataType: 'json',
 			success: function(data){
 				if (data.result==1){
-					$('.resultHp').css('color','red').text('이미 사용중인 번호이니다.');
+					$('.resultHp').css('color','red').text('이미 사용중인 번호입니다.');
 				}else{
 					$('.resultHp').css('color','green').text('사용가능한 번호입니다.');
 				}

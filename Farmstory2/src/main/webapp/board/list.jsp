@@ -62,7 +62,7 @@
 	            <%for (ArticleBean article: articles){ %>
 	            <tr>
 	                <td><%= pageStartNum-- %></td>
-	                <td><a href="/Farmstory2/board/view.jsp?seq=<%= article.getSeq()%>"><%=article.getTitle() %></a>&nbsp;[<%= article.getComment() %>]</td>
+	                <td><a href="/Farmstory2/board/view.jsp?group=<%=group%>&cate=<%=cate%>&seq=<%= article.getSeq()%>"><%=article.getTitle() %></a>&nbsp;[<%= article.getComment() %>]</td>
 	                <td><%= article.getNick() %></td>
 	                <td><%= article.getRdate().substring(2,10) %></td>
 	                <td><%= article.getHit() %></td>
@@ -85,7 +85,7 @@
 	    </div>
 	
 	    <!-- 글쓰기 버튼 -->
-	    <a href="/Farmstory2/board/write.jsp?cate=<%=cate %>group=<%=group %>" class="btnWrite">글쓰기</a>
+	    <a href="/Farmstory2/board/write.jsp?cate=<%=cate %>&group=<%=group %>" class="btnWrite">글쓰기</a>
 	
 	
 		  <!--컨텐츠내용 끝-->

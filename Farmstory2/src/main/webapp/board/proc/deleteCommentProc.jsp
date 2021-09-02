@@ -5,7 +5,8 @@
 
 	String parent = request.getParameter("parent");
 	String seq = request.getParameter("seq");
-	String uri = request.getParameter("uri");
+	String cate = request.getParameter("cate");
+	String group = request.getParameter("group");
 	
 	ArticleDao dao = ArticleDao.getInstance();
 	//댓글삭제
@@ -13,6 +14,6 @@
 	//댓글 카운트 -1
 	dao.updateArticleCommentCount(parent, -1);
 	//리다이렉트
-	response.sendRedirect(uri+"?mode=v&seq="+parent);
+	response.sendRedirect("/Farmstory2/board/view.jsp?cate="+cate+"&group="+group+"&seq="+parent);
 
 %>

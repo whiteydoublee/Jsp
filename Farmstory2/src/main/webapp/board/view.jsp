@@ -2,14 +2,110 @@
 <%@page import="kr.co.farmstory2.bean.ArticleBean"%>
 <%@page import="kr.co.farmstory2.dao.ArticleDao"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		
+		// 댓글 삭제
+		$('.btnCommentDel').click(function(){
+			var result = confirm('정말 삭제 하시겠습니까?');
+			return result;
+		});
+		
+		
+		var content = '';
+		
+		// 댓글 수정
+		$('.btnCommentModify').click(function(){
+			
+			var tag = $(this);
+			var mode = $(this).text();    			    			
+			var textarea = $(this).parent().prev();
+			
+			if(mode == '수정'){
+				// 수정모드
+				content = textarea.val(); 
+				
+				$(this).prev().css('display', 'none');
+				$(this).next().css('display', 'inline');
+				$(this).text('수정완료');
+				textarea.attr('readonly', false).focus();
+    			textarea.css({
+    				'background': 'white',
+    				'outline': '1px solid gray'
+    			});
+    			
+			}else{
+				// 수정완료 모드
+				
+				var seq     = textarea.attr('data-seq');
+				var comment = textarea.val(); 
+				
+				var jsonData = {
+						'seq': seq,
+						'comment': comment
+					};
+				
+				$.ajax({
+					url: '/Farmstory2/board/proc/updateCommentProc.jsp',
+					type: 'post',
+					data: jsonData,   // 서버로 전송하는 데이터(JSON) 지정
+					dataType: 'json', // 서버로 부터 전달되는 데이터 종류
+					success: function(data){
+						if(data.result == 1){
+							alert('댓글 수정이 성공 했습니다.');
+							
+							// 수정모드 해제
+							tag.text('수정');
+							tag.prev().css('display', 'inline');
+							tag.next().css('display', 'none');    			    			    							
+			    			textarea.attr('readonly', true);
+			    			textarea.css({
+			    				'background': 'transparent',
+			    				'outline': 'none'
+			    			});
+			    			
+						}else{
+							alert('댓글 수정이 실패 했습니다.');
+						}
+					}
+				});
+			}
+			return false;
+		});
+		
+		// 댓글 수정 취소
+		$('.btnCommentCancel').click(function(e){
+			e.preventDefault();
+			$(this).prev().text('수정');
+			$(this).prev().prev().css('display', 'inline');
+			$(this).css('display', 'none');
+			
+			var textarea = $(this).parent().prev();
+			
+			textarea.val(content);
+			textarea.attr('readonly', true);
+			textarea.css({
+				'background': 'transparent',
+				'outline': 'none'
+			});	
+		});
+		
+		
+	});
+		
+</script>
+
+<%@ include file="../_header.jsp" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 
-	String uid = request.getParameter("uid");
 	String seq = request.getParameter("seq");
 	String group = request.getParameter("group");
 	String cate = request.getParameter("cate");
 	String includeFile = "./_aside"+group+".jsp";
+	
+	String uid = mb.getUid();
 	
 	ArticleDao dao = ArticleDao.getInstance();
 	
@@ -22,101 +118,6 @@
 	//댓글 가져오기
 	List <ArticleBean> comments = dao.selectComments(seq);
 %>
-<script>
-$(document).ready(function(){
-	
-	// 댓글 삭제
-	$('.btnCommentDel').click(function(){
-		var result = confirm('정말 삭제 하시겠습니까?');
-		return result;
-	});
-	
-	
-	var content = '';
-	
-	// 댓글 수정
-	$('.btnCommentModify').click(function(){
-		
-		var tag = $(this);
-		var mode = $(this).text();    			    			
-		var textarea = $(this).parent().prev();
-		
-		if(mode == '수정'){
-			// 수정모드
-			content = textarea.val(); 
-			
-			$(this).prev().css('display', 'none');
-			$(this).next().css('display', 'inline');
-			$(this).text('수정완료');
-			textarea.attr('readonly', false).focus();
-			textarea.css({
-				'background': 'white',
-				'outline': '1px solid gray'
-			});
-			
-		}else{
-			// 수정완료 모드
-			
-			var seq     = textarea.attr('data-seq');
-			var comment = textarea.val(); 
-			
-			var jsonData = {
-					'seq': seq,
-					'comment': comment
-				};
-			
-			$.ajax({
-				url: '/Farmstory2/board/proc/updateCommentProc.jsp',
-				type: 'post',
-				data: jsonData,   // 서버로 전송하는 데이터(JSON) 지정
-				dataType: 'json', // 서버로 부터 전달되는 데이터 종류
-				success: function(data){
-					if(data.result == 1){
-						alert('댓글 수정이 성공 했습니다.');
-						
-						// 수정모드 해제
-						tag.text('수정');
-						tag.prev().css('display', 'inline');
-						tag.next().css('display', 'none');    			    			    							
-		    			textarea.attr('readonly', true);
-		    			textarea.css({
-		    				'background': 'transparent',
-		    				'outline': 'none'
-		    			});
-		    			
-					}else{
-						alert('댓글 수정이 실패 했습니다.');
-					}
-				}
-			});
-		}
-		return false;
-	});
-	
-	// 댓글 수정 취소
-	$('.btnCommentCancel').click(function(e){
-		e.preventDefault();
-		$(this).prev().text('수정');
-		$(this).prev().prev().css('display', 'inline');
-		$(this).css('display', 'none');
-		
-		var textarea = $(this).parent().prev();
-		
-		textarea.val(content);
-		textarea.attr('readonly', true);
-		textarea.css({
-			'background': 'transparent',
-			'outline': 'none'
-		});	
-	});
-	
-	
-});
-	
-</script>
-
-<%@ include file="../_header.jsp" %>
-
 <jsp:include page="<%=includeFile %>">
 	<jsp:param value="<%=cate %>" name="cate"/>
 </jsp:include>
@@ -140,16 +141,16 @@ $(document).ready(function(){
           <tr>
               <td>내용</td>
               <td>
-                  <textarea name="content" readonly><%=article.getContent() %></textarea>
+                  <textarea name="content" readonly><%=article.getContent()%></textarea>
               </td>
           </tr>
       </table>
       <div>
       	<%if (uid.equals(article.getUid())){ %>
-          <a href="/Farmstory2/board/proc/deleteProc.jsp?seq=<%= article.getSeq() %>&cate=<%=cate %>" class="btnDelete">삭제</a>
-          <a href="/Farmstory2/board/proc/updateCommentProc?cate=<%=cate %>&seq=<%=article.getSeq() %>" class="btnModify">수정</a>
+          <a href="/Farmstory2/board/proc/deleteProc.jsp?group=<%=group %>&cate=<%=cate %>&seq=<%= article.getSeq() %>" class="btnDelete">삭제</a>
+          <a href="/Farmstory2/board/modify.jsp?group=<%=group %>&cate=<%=cate %>&seq=<%=article.getSeq() %>" class="btnModify">수정</a>
       	<%} %>
-          <a href="/Farmstory2/board/list.jsp?group=<%=group %>&cate=<%=cate %>" class="btnList">목록</a>
+          <a href="/Farmstory2/board/list.jsp?group=<%=group %>&cate=<%=cate %>&seq=<%=article.getSeq() %>" class="btnList">목록</a>
       </div>  
       
       <!-- 댓글리스트 -->
@@ -166,9 +167,9 @@ $(document).ready(function(){
               
               <%if (uid.equals(comment.getUid())){ %>
               <div>                  
-              	<a href="/Farmstory2/board/proc/deleteCommentProc.jsp?parent=<%=comment.getParent() %>&seq=<%=comment.getSeq() %>" class ="btnCommentDel">삭제</a>
+              	<a href="/Farmstory2/board/proc/deleteCommentProc.jsp?group=<%=group %>&cate=<%=cate %>&parent=<%=comment.getParent() %>&seq=<%=comment.getSeq() %>" class ="btnCommentDel">삭제</a>
                 <a href="#" class = "btnCommentModify">수정</a>
-                <a href="#" class = "btnCommentCancel">취소</a>
+                <a href="#" class = "btnCommentCancel" style="display:none">취소</a>
               </div>
               <%} %>
           </article>
@@ -181,7 +182,7 @@ $(document).ready(function(){
       <!-- 댓글입력폼 -->
       <section class="commentForm">
           <h3>댓글쓰기</h3>
-          <form action="/Farmstory2/board/proc/insertCommentProc.jsp" method="post">
+          <form action="/Farmstory2/board/proc/insertCommentProc.jsp?group=<%=group %>&cate=<%=cate %>" method="post">
           	<input type="hidden" name="parent" value="<%= article.getSeq() %>">
           	<input type="hidden" name="uid" value="<%= uid %>">
               <textarea name="content"></textarea>
@@ -191,10 +192,7 @@ $(document).ready(function(){
               </div>
           </form>
       </section>
+     </section>
       
-       </article>
-	 </section>
-</div>
-	 
 <%@ include file="../_footer.jsp" %>
 

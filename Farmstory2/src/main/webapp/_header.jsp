@@ -5,6 +5,10 @@
 	MemberBean mb = (MemberBean) session.getAttribute("sessMember");
 
 	String success =request.getParameter("success");
+	
+	if (mb == null){
+		response.sendRedirect("/Farmstory2/user/login.jsp?success=102");
+	}
 
 %>
 
