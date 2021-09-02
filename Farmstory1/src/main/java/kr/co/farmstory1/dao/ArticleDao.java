@@ -329,7 +329,12 @@ public class ArticleDao {
 		try {
 			Connection conn = DBConfig.getInstance().getConnection();
 			PreparedStatement psmt = conn.prepareStatement(Sql.UPDATE_ARTICLE);
+			psmt.setString(1, title);
+			psmt.setString(2, content);
+			psmt.setString(3, seq);
+			psmt.executeUpdate();
 			
+			conn.close();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
