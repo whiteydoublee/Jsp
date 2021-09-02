@@ -105,6 +105,11 @@
 	String cate = request.getParameter("cate");
 	String includeFile = "./_aside"+group+".jsp";
 	
+	if (mb == null){
+		response.sendRedirect("/Farmstory2/user/login.jsp?success=102");
+		return;
+	}
+	
 	String uid = mb.getUid();
 	
 	ArticleDao dao = ArticleDao.getInstance();
@@ -117,6 +122,8 @@
 	
 	//댓글 가져오기
 	List <ArticleBean> comments = dao.selectComments(seq);
+
+	
 %>
 <jsp:include page="<%=includeFile %>">
 	<jsp:param value="<%=cate %>" name="cate"/>
@@ -184,7 +191,7 @@
           <h3>댓글쓰기</h3>
           <form action="/Farmstory2/board/proc/insertCommentProc.jsp?group=<%=group %>&cate=<%=cate %>" method="post">
           	<input type="hidden" name="parent" value="<%= article.getSeq() %>">
-          	<input type="hidden" name="uid" value="<%= uid %>">
+          	<input type="hidden" name="uid" value="<%= uid%>">
               <textarea name="content"></textarea>
               <div>
                   <a href="#" class="btnCancel">취소</a>

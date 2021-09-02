@@ -2,6 +2,7 @@
 <%@page import="kr.co.farmstory2.dao.ArticleDao"%>
 <%@page import="kr.co.farmstory2.bean.ArticleBean"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../_header.jsp" %>
 <%
 	//전송데이터 수신
 	request.setCharacterEncoding("UTF-8");
@@ -40,8 +41,10 @@
 	//게시물 가져오기 
 	List <ArticleBean> articles = ArticleDao.getInstance().selectArticles(cate,start);
 	
+	
+	
 %>
-<%@ include file="../_header.jsp" %>
+
 
 <jsp:include page="<%=includeFile %>">
 	<jsp:param value="<%=cate %>" name="cate"/>
