@@ -79,6 +79,7 @@ public class MainController extends HttpServlet{
 	//Post방식
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		requestProc(req, resp);
 	}
 	
@@ -93,12 +94,18 @@ public class MainController extends HttpServlet{
 //		CommonService service = (CommonService) instances;
 		CommonService instance = (CommonService) instances.get(key);
 		
-		// Service 객체 실행 후 View 정보 받기
-		String view = instance.requestProc(req, resp);
-		
-		// 해당 View로 forward 하기
-		RequestDispatcher dispatcher = req.getRequestDispatcher(view);
-		dispatcher.forward(req, resp);
+		// Service 객체 실행 후 결과 정보 받기
+		String result = instance.requestProc(req, resp);
+		if(result.startsWith("redirect:")) {
+			//리다이렉트
+			String redirectUrl = result.substring(9);
+			resp.sendRedirect(path+redirectUrl);
+			
+		} else{
+			// 해당 View로 forward 하기
+			RequestDispatcher dispatcher = req.getRequestDispatcher(result);
+			dispatcher.forward(req, resp);
+		}
 		
 	}
 }
