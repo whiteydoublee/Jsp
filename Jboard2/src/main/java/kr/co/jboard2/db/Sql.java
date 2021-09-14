@@ -46,7 +46,6 @@ public class Sql {
 	
 	public static final String SELECT_MAX_SEQ = "SELECT MAX(`seq`) FROM `article`;";
 	public static final String INSERT_ARTICLE = "INSERT INTO `article` SET "
-												+ "`cate`=?,"
 												+"`title`=?,"
 												+"`content`=?,"
 												+"`file`=?,"
