@@ -5,6 +5,20 @@
     <meta charset="UTF-8">
     <title>로그인</title>
     <link rel="stylesheet" href="/Jboard2/css/style.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    	var success = ${requestScope.success};
+    	
+    	if(success==100){
+    		alert('일치하는 회원이 없습니다. \n아이디, 비밀번호를 다시 확인해주세요.');
+    	}else if (success==101){
+    		alert('정상적으로 로그아웃이 되었습니다.');
+    	}else if (success==102){
+    		alert('먼저 로그인을 하셔야합니다.');
+    	}else if (success==103){
+    		alert('글 작성을 하시려면 로그인을 하셔야합니다.')
+    	}
+    </script>
 </head>
 <body>
     <div id="wrapper">
