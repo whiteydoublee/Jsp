@@ -2,12 +2,12 @@ package kr.co.jboard2.db;
 
 public class Sql {
 	
-	//ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ï¿½ï¿?
-	public static final String SELECT_TERMS = "SELECT * FROM `Jboard_terms`;"; // class ï¿½ï¿½ï¿½ï¿½
-	public static final String SELECT_MEMBER = "SELECT * FROM `member` WHERE `uid`=? AND `pass`=PASSWORD(?);"; // ï¿½ï¿½È£È­ï¿½ï¿½ï¿½Ñ³ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ï¿½È°ï¿½ï¿½ï¿½ ï¿½ï¿½È£È­ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
+	//»ç¿ëÀÚ°ü·Ã
+	public static final String SELECT_TERMS = "SELECT * FROM `Jboard_terms`;"; // class º¯¼ö
+	public static final String SELECT_MEMBER = "SELECT * FROM `member` WHERE `uid`=? AND `pass`=PASSWORD(?);"; // ¾ÏÈ£È­½ÃÄÑ³ùÀ¸¹Ç·Î ¶È°°ÀÌ ¾ÏÈ£È­»óÅÂ·Î ¸ÊÇÎ
 	public static final String INSERT_MEMBER = "INSERT INTO `member` SET"
 							 + "`uid`=?,"
-							 + "`pass`=PASSWORD(?)," // ï¿½ï¿½Ð¹ï¿½È£ï¿½ï¿? ï¿½ï¿½È£È­ï¿½Ç¾ï¿½ï¿½ï¿½Ï¹Ç·ï¿?, PASSWORD()ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½)
+							 + "`pass`=PASSWORD(?)," // ºñ¹Ð¹øÈ£´Â ¾ÏÈ£È­µÇ¾î¾ßÇÏ¹Ç·Î, PASSWORD()ÇÔ¼ö¸¦ ½áÁÜ (¾àÇÔ)
 							 + "`name`=?,"
 							 + "`nick`=?,"
 							 + "`email`=?,"
@@ -16,24 +16,20 @@ public class Sql {
 							 + "`addr1`=?,"
 							 + "`addr2`=?,"
 							 + "`regip`=?,"
-							 + "`rdate`=NOW();"; // NOW():ï¿½Ô¼ï¿½ 
-	//ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+							 + "`rdate`=NOW();"; // NOW():ÇÔ¼ö 
+	//°Ô½ÃÆÇ °ü·Ã
 	//8/18
 	public static final String SELECT_ARTICLE = "SELECT * FROM `article` AS a "
 												+ "LEFT JOIN `Jboard_file` AS b "
 												+ "ON a.seq = b.parent "
 												+ "WHERE `seq`=?;";
 	//8/17
-	public static final String SELECT_COUNT_TOTAL="SELECT COUNT(`seq`) FROM `article` WHERE `parent`=0 AND `cate`=?;";
-	
-	public static final String SELECT_LATEST = "SELECT `seq`,`title`,`rdate` FROM `article`"
-												+ "WHERE `cate`=? AND `parent`=0 "
-												+ "ORDER BY `seq` DESC LIMIT 5;";
+	public static final String SELECT_COUNT_TOTAL="SELECT COUNT(`seq`) FROM `article` WHERE `parent`=0;";
 	
 	public static final String SELECT_ARTICLES	="SELECT a.*, b.nick FROM `article` AS a "
 												+ "JOIN `member` AS b "
 												+ "ON a.uid = b.uid "
-												+ "WHERE `parent`=0 AND `cate`=? "
+												+ "WHERE `parent`=0 "
 												+ "ORDER BY `seq` DESC "
 												+ "LIMIT ?,10;";
 	
@@ -45,6 +41,9 @@ public class Sql {
 												+ "ORDER BY `seq` ASC ";
 	
 	public static final String SELECT_MAX_SEQ = "SELECT MAX(`seq`) FROM `article`;";
+	
+	public static final String SELECT_FILE = "SELECT * FROM `Jboard_file` WHERE `fseq`=?;";
+	
 	public static final String INSERT_ARTICLE = "INSERT INTO `article` SET "
 												+"`title`=?,"
 												+"`content`=?,"
@@ -58,7 +57,7 @@ public class Sql {
 											+"`oriName`=?,"
 											+"`newName`=?,"
 											+"`rdate`=NOW();";
-	//ï¿½ï¿½ï¿?
+	//´ñ±Û
 		public static final String INSERT_COMMENT="INSERT INTO `article` SET "
 													+ "`parent`=?,"
 													+ "`content`=?,"	
@@ -67,27 +66,22 @@ public class Sql {
 													+ "`rdate`=NOW();";
 		
 		public static final String DELETE_COMMENT = "DELETE FROM `article` WHERE `seq`=?;";
-		public static final String DELETE_ARTICLE = "DELETE FROM `article` WHERE `seq`=?;";
 											
 	
-	public static final String SELECT_COUNT_UID="SELECT COUNT(`uid`) FROM `member` WHERE `uid`=?;"; // count ï¿½ï¿½ï¿½ï¿½(ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½Å­ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½Ö¹Ç·ï¿½ countï¿½ï¿½ ï¿½ï¿½.)
+	public static final String SELECT_COUNT_UID="SELECT COUNT(`uid`) FROM `member` WHERE `uid`=?;"; // count Äõ¸®(ÀÖ´Â ¼ýÀÚ¸¸Å­ ³ªÅ¸³»ÁÖ¹Ç·Î count¸¦ ¾¸.)
 	public static final String SELECT_COUNT_NICK="SELECT COUNT(`nick`) FROM `member` WHERE `nick`=?;";
 	public static final String SELECT_COUNT_EMAIL = "SELECT COUNT(`email`) FROM `member` WHERE `email`=?;";
 	public static final String SELECT_COUNT_HP="SELECT COUNT(`hp`) FROM `member` WHERE `hp`=?;";
 	
-	//8/18ï¿½ï¿½È¸ï¿½ï¿½
+	//8/18Á¶È¸¼ö
 	public static final String UPDATE_ARTICLE_HIT="UPDATE `article` SET `hit` =`hit`+1 "
 													+"WHERE `seq`=?;";
 	public static final String UPDATE_ARTICLE_COMMENT = "UPDATE `article` SET `comment` = `comment`+1 WHERE `seq`=?;";
 	public static final String UPDATE_ARTICLE_COMMENT_MINUS = "UPDATE `article` SET `comment` = `comment`-1 WHERE `seq`=?;";
 	
 	public static final String UPDATE_COMMENT ="UPDATE `article` SET `content`=? WHERE `seq`=?;";
-	// content = ï¿½Ù²ï¿½ ï¿½ï¿½ï¿½ï¿½, seq= ï¿½ï¿½ï¿? ï¿½ï¿½È£ 
-	
-	public static final String UPDATE_ARTICLE = "UPDATE `article` SET "
-												+ "`title`=?, "
-												+ "`content`=?, "
-												+ "WHERE `seq` =?;";
+	// content = ¹Ù²ï ³»¿ë, seq= ´ñ±Û ¹øÈ£ 
 
+	public static final String UPDATE_FILE_DOWNLOAD = "UPDATE `Jboard_file` SET `download`=`download` + 1 WHERE `fseq`=?";
 	
 }
