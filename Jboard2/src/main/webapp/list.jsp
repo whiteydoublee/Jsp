@@ -28,7 +28,7 @@
                      <c:forEach var="vo" items="${articles}">
 	                    <tr>
 	                        <td>${pageStartNum = pageStartNum -1}</td>
-	                        <td><a href="/Jboard2/view.do">${vo.title}</a>&nbsp;[${vo.comment}]</td>
+	                        <td><a href="/Jboard2/view.do?seq=${vo.seq }">${vo.title}</a>&nbsp;[${vo.comment}]</td>
 	                        <td>${vo.nick}</td>
 	                        <td>${vo.rdate}</td>
 	                        <td>${vo.hit}</td>
@@ -44,7 +44,7 @@
                		<a href="/Jboard2/list.do?pg=${ groups[0]-1}" class="prev">이전</a>
                 </c:if>
                 
-                <c:forEach var="i" begin="${groups.[0] }" end="${groups[1] }">
+                <c:forEach var="i" begin="${groups[0] }" end="${groups[1] }">
                 	<a href="/Jboard2/list.do?pg=${i}" class="num ${currentPage == i ?'current':'off'}">${i}</a>                
                 </c:forEach>
                 <c:if test="${groups[1] < lastPageNum }">

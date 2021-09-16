@@ -1,8 +1,12 @@
 package kr.co.jboard2.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -17,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kr.co.jboard2.service.CommonService;
+import kr.co.jboard2.vo.FileVo;
 
 
 
@@ -92,10 +97,41 @@ public class MainController extends HttpServlet {
 			// 리다이렉트
 			String redirecUrl = result.substring(9);
 			resp.sendRedirect(path+redirecUrl);
-		}else if (result.startsWith("json:")) {
-			//Json출력
+		}else if (result.startsWith("json:")) {//Json출력
 			PrintWriter out = resp.getWriter();
 			out.print(result.substring(5));
+		}else if (result.startsWith("file:")) {//클라이언트로 파일 전송다운로드
+			//Service에서 저장한 FileVo 객체 Controller에서 꺼내기.
+			FileVo fvo = (FileVo) req.getAttribute("fvo");
+			
+			// response 헤더 수정 
+			resp.setContentType("application/octet-stream");
+			resp.setHeader("Content-Disposition", "attachment; filename="+URLEncoder.encode(fvo.getOriName(), "utf-8"));
+			resp.setHeader("Content-Transfer-Encoding", "binary");
+			resp.setHeader("Pragma", "no-cache");
+			resp.setHeader("Cache-Control", "private");
+			
+			// response 객체 파일 스트림작업 
+			String filepath = req.getServletContext().getRealPath("/file");
+			File file = new File(filepath+"/"+fvo.getNewName());
+			
+			BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+			BufferedOutputStream bos = new BufferedOutputStream(resp.getOutputStream());
+			
+			while(true){
+				
+				int data = bis.read();
+				
+				if(data == -1){ // 더 이상 읽을 데이터가 없을 경우 
+					break;
+				}
+				
+				bos.write(data);
+			}
+			bos.close();
+			bis.close();
+			
+			
 		}else {
 			// 해당 View로 forward 하기
 			RequestDispatcher dispatcher = req.getRequestDispatcher(result);
