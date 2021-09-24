@@ -11,7 +11,7 @@
                   <li class="${cate == 'menu' ? 'on':'off' }"><a href="/Farmstory3/board/list.do?group=Community&cate=menu">오늘의 식단</a></li>
                   <li class="${cate == 'chef' ? 'on':'off' }"><a href="/Farmstory3/board/list.do?group=Community&cate=chef">나도요리사</a></li>
                   <li class="${cate == 'qna' ? 'on':'off' }"><a href="/Farmstory3/board/list.do?group=Community&cate=qna">고객문의</a></li>
-                  <li class="${cate == 'faq' ? 'on':'off' }"><a href="/Farmstory3/board/list.do?group=Community&cate=faq">자주묻는 질문</a></li>
+                  <li class="${cate == 'fnq' ? 'on':'off' }"><a href="/Farmstory3/board/list.do?group=Community&cate=fnq">자주묻는 질문</a></li>
               </ul>
 
           </aside>
@@ -25,7 +25,7 @@
                       <c:if test ="${cate == 'menu' }"><em>오늘의 식단</em></c:if>
                       <c:if test ="${cate == 'chef' }"><em>나도요리사</em></c:if>
                       <c:if test ="${cate == 'qna' }"><em>고객문의</em></c:if>
-                      <c:if test ="${cate == 'faq' }"><em>자주묻는 질문</em></c:if>
+                      <c:if test ="${cate == 'fnq' }"><em>자주묻는 질문</em></c:if>
                   </p>
               </nav>
 

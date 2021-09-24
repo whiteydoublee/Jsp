@@ -9,7 +9,7 @@
               <ul class="lnb">
                   <li class="${cate == 'story' ? 'on':'off' }"><a href="/Farmstory3/board/list.do?group=Croptalk&cate=story">농작물이야기</a></li>
                   <li class="${cate == 'grow' ? 'on':'off' }"><a href="/Farmstory3/board/list.do?group=Croptalk&cate=grow">텃밭가꾸기</a></li>
-                  <li class="${cate == 'school' ? 'on':'off' }"><a href="/Farmstory3/direction.do?group=Croptalk&cate=school">귀농학교</a></li>
+                  <li class="${cate == 'school' ? 'on':'off' }"><a href="/Farmstory3/board/list.do?group=Croptalk&cate=school">귀농학교</a></li>
 
           </aside>
           <article>

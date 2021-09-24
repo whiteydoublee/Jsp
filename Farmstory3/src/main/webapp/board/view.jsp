@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file ="../_header.jsp" %>
+	<jsp:include page ="./_aside${group}.jsp" />
         <section id="board" class="view">
             <h3>글보기</h3>
             <table>
@@ -13,7 +14,7 @@
                 <tr>
                     <td>첨부파일</td>
                     <td>
-                        <a href="/Farmstory3/fileDownload.do?fseq=${vo.fb.fseq }">${vo.fb.oriName }</a>
+                        <a href="/Farmstory3/board/fileDownload.do?fseq=${vo.fb.fseq }">${vo.fb.oriName }</a>
                         <span>${vo.fb.download } 회 다운로드</span>
                     </td>
                 </tr>
@@ -26,9 +27,9 @@
                 </tr>
             </table>
             <div>
-                <a href="#" class="btnDelete">삭제</a>
-                <a href="/Farmstory3/modify.do" class="btnModify">수정</a>
-                <a href="/Farmstory3/list.do" class="btnList">목록</a>
+                <a href="/Farmstory3/board/delete.do?group=${group }&cate=${cate }&seq=${vo.seq }" class="btnDelete">삭제</a>
+                <a href="/Farmstory3/board/modify.do?group=${group }&cate=${cate }&seq=${vo.seq }" class="btnModify">수정</a>
+                <a href="/Farmstory3/board/list.do?group=${group}&cate=${cate}" class="btnList">목록</a>
             </div>  
             
             <!-- 댓글리스트 -->
@@ -59,7 +60,7 @@
             <!-- 댓글입력폼 -->
             <section class="commentForm">
                 <h3>댓글쓰기</h3>
-                <form action="/Farmstory3/comment.do" method="post">
+                <form action="/Farmstory3/board/comment.do" method="post">
                 	<input type="hidden" name="parent" value="${vo.seq}"/>
                 	<input type="hidden" name="uid" value="${sessMember.uid}"/>
                     <textarea name="content"></textarea>

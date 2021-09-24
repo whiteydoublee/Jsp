@@ -1,10 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../_header.jsp" %>
-<head>
-    <meta charset="UTF-8">
-    <title>회원가입</title>
-    <link rel="stylesheet" href="/Farmstory3/css/style.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/Farmstory3/js/zipcode.js"></script>
+ 		
     <script>
     $(function(){
     	
@@ -19,32 +16,33 @@
     	var isNameOk = false;
     	var isNickOk = false;
     	
-    	//ID 중복체크
-    	$('input[name=uid]').focusout(function(){
-    		var uid = $(this).val();
-    		
-    		$.ajax({
-    			url: '/Farmstory3/user/checkUid.do?uid='+uid,
-    			type: 'get',
-    			dataType: 'json',
-    			success:function(data){
-    				if(data.result==1){
-    					$('.resultId').css('color','red').text('이미 사용중인 아이디 입니다.');
-    					isUidOk=false;
-    					}else {
-    						$('.resultId').css('color','red').text('사용가능한 아이디입니다.');
-    						//아이디유효성 검사
-    						if (reUid.test(uid)){
-    							$('.resultId').css('color','green').text('사용 가능한 아이디 입니다.');
-    							isUidOk = true;
-    						}else {
-    							$('.resultId').css('color','red').text('아이디는 영문 소문자, 숫자 조합 4-10자까지 입니다.');
-    							isUidOk = false;
-    						}
-    					}
-    			}
-    		});
-    	});
+    	// 아이디 중복체크
+        $('input[name=uid]').focusout(function(){
+
+            var uid = $(this).val(); //내가 선택한 필드의 값
+
+            $.ajax({
+                url:'/Farmstory3/member/checkUid.do?uid='+uid,
+                type:'get',
+                dataType:'json',
+                success:function(data){
+                	if(data.result == 1){
+                	$('.resultId').css('color','red').text('이미 사용중인 아이디 입니다.');
+ 					isUidOk=false;
+ 					}else {
+ 						$('.resultId').css('color','red').text('사용가능한 아이디입니다.');
+ 						//아이디유효성 검사
+ 						if (reUid.test(uid)){
+ 							$('.resultId').css('color','green').text('사용 가능한 아이디 입니다.');
+ 							isUidOk = true;
+ 						}else {
+ 							$('.resultId').css('color','red').text('아이디는 영문 소문자, 숫자 조합 4-10자까지 입니다.');
+ 							isUidOk = false;
+ 						}
+
+                }
+            });
+        });
     	
     	//비밀번호 유효성 검사
    		$('input[name=pass2]').focusout(function(){
@@ -83,7 +81,7 @@
    			var nick = $(this).val();
    			
    			$.ajax({
-   				url: '/Farmstory2/user/proc/checkNick.jsp?nick='+nick,
+   				url: '/Farmstory3/member/checkNick.do?nick='+nick,
    				type: 'get',
    				dataType: 'json',
    				success: function(data){
@@ -109,7 +107,7 @@
    			var email = $(this).val();
    			
    			$.ajax({
-   				url: '/Farmstory2/user/proc/checkEmail.jsp?email='+email,
+   				url: '/Farmstory3/member/checkEmail.do?email='+email,
    				type: 'get',
    				dataType: 'json',
    				success: function(data){
@@ -126,7 +124,7 @@
    		$('input[name=hp]').focusout(function(){
    			var hp = $(this).val();
    			$.ajax({
-   				url: '/Farmstory2/user/proc/checkHp.jsp?hp='+hp,
+   				url: '/Farmstory3/member/checkHp.do?hp='+hp,
    				type: 'get',
    				dataType: 'json',
    				success: function(data){
@@ -141,8 +139,11 @@
    	});
 
     </script>
+    
+    <%@ include file="../_header.jsp" %>
+
         <section id="user" class="register">
-            <form action="/Farmstory3/user/register.do" method="POST">
+            <form action="/Farmstory3/member/register.do" method="POST">
                 <table border="1">
                     <caption>사이트 이용정보 입력</caption>
                     <tr>
@@ -199,7 +200,7 @@
                         <td>
                             <div>
                                 <input type="text" name="zip" placeholder="우편번호" readonly/>
-                                <button class="btnZip">주소검색</button>
+                               <button type = "button" class="btnZip" onclick="zipcode()">주소검색</button>
                             </div>                            
                             <div>
                                 <input type="text" name="addr1" placeholder="주소를 검색하세요." readonly/>
@@ -212,7 +213,7 @@
                 </table>
 
                 <div>
-                    <a href="/Farmstory3/user/login.do" class="btnCancel">취소</a>
+                    <a href="/Farmstory3/member/login.do" class="btnCancel">취소</a>
                     <input type="submit"   class="btnJoin" value="회원가입"/>
                 </div>
 

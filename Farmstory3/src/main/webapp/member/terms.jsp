@@ -1,5 +1,30 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+
+	$(document).ready(function(){
+		
+		// a:nth-child(2): '다음' 버튼
+		var btnNext=$('.terms > div > a:nth-child(2)')
+		btnNext.click(function(){
+			//Jquery는 연쇄적으로 호출이 가능(순서가 중요)
+			var isChecked1 = $('input[name=chk1]').is(':checked'); // : 상태선택자
+			var isChecked2 = $('input[name=chk2]').is(':checked');
+			
+			//check가 되어 있지 않아야 하므로, !(not)checked#을 조건으로 해줌 
+			//* ||(or):하나라도 안 되어 잇을 경우 거짓 (두 박스 중 하나라도 체크되지 않으면 페이지를 넘기지 않음)
+			if (!isChecked1 || !isChecked2){
+				alert('동의 체크를 하셔야합니다.');
+				return false;
+			}else{
+				return true;
+			}
+		});
+		
+	});
+	</script>
+
 <%@ include file ="../_header.jsp" %>
         <section id="user" class="terms">
             <table>
@@ -25,8 +50,8 @@
                 </tr>
             </table>
             <div>
-                <a href="/Farmstory3/user/login.do">취소</a>
-                <a href="/Farmstory3/user/register.do">다음</a>
+                <a href="/Farmstory3/member/login.do">취소</a>
+                <a href="/Farmstory3/member/register.do">다음</a>
             </div>
         </section>
 

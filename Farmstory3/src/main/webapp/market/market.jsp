@@ -4,23 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <title>팜스토리::장보기</title>
-    <link rel="stylesheet" href="../css/style.css"/>
+    <link rel="stylesheet" href="/Farmstory3/css/style.css"/>
 </head>
 <body>
     <div id="wrapper">
         <header>
-            <a href="#" class="logo"><img src="../img/logo.png" alt="로고"/></a>
+            <a href="#" class="logo"><img src="/Famrstory3/img/logo.png" alt="로고"/></a>
             <p>
                 <a href="#">HOME |</a>
                 <a href="#">로그인 |</a>
                 <a href="#">회원가입 |</a>
                 <a href="#">고객센터</a>
             </p>
-            <img src="../img/head_txt_img.png" alt="3만원 이상 무료배송"/>
+            <img src="/Farmstory3/img/head_txt_img.png" alt="3만원 이상 무료배송"/>
             
             <ul class="gnb">
                 <li><a href="#">팜스토리소개</a></li>
-                <li><a href="#"><img src="../img/head_menu_badge.png" alt="30%"/>장바구니</a></li>
+                <li><a href="#"><img src="/Farmstory3/img/head_menu_badge.png" alt="30%"/>장바구니</a></li>
                 <li><a href="#">농작물이야기</a></li>
                 <li><a href="#">이벤트</a></li>
                 <li><a href="#">커뮤니티</a></li>
@@ -31,10 +31,10 @@
             <div><img src="../img/sub_top_tit2.png" alt="MARKET"></div>
             <section class="cate2">
                 <aside>
-                    <img src="../img/sub_aside_cate2_tit.png" alt="장보기"/>
+                    <img src="/Famrstory3/img/sub_aside_cate2_tit.png" alt="장보기"/>
 
                     <ul class="lnb">
-                        <li class="on"><a href="./market.html">장보기</a></li>
+                        <li class="on"><a href="/Famrstory3/market/market.do">장보기</a></li>
                     </ul>
                 </aside>
                 <article>

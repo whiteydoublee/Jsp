@@ -8,8 +8,7 @@
                     <img src="../img/sub_aside_cate3_tit.png" alt="농작물이야기"/>
 
                     <ul class="lnb">
-                        <li class="on"><a href="./story.html">농작물이야기</a><
-                        /li>
+                        <li class="on"><a href="/Farmstory3/croptalk/story.do">농작물이야기</a></li>
                         <li><a href="/Farmstory3/croptalk/grow.do">텃밭가꾸기</a></li>
                         <li><a href="/Farmstory3/croptalk/shcool.do">귀농학교</a></li>
                     </ul>
@@ -17,7 +16,7 @@
                 </aside>
                 <article>
                     <nav>
-                        <img src="../img/sub_nav_tit_cate3_tit1.png" alt="농작물이야기"/>
+                        <img src="/Farmstory3/img/sub_nav_tit_cate3_tit1.png" alt="농작물이야기"/>
                         <p>
                             HOME > 농작물이야기 > <em>농작물이야기</em>
                         </p>

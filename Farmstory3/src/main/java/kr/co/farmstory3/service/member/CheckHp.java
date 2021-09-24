@@ -3,22 +3,25 @@ package kr.co.farmstory3.service.member;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.JsonObject;
+
 import kr.co.farmstory3.dao.MemberDao;
 import kr.co.farmstory3.service.CommonService;
-import kr.co.farmstory3.vo.TermsVo;
 
-public class TermsService implements CommonService{
+public class CheckHp implements CommonService{
 
 	@Override
 	public String requestProc(HttpServletRequest req, HttpServletResponse resp) {
-		// TODO Auto-generated method stub
 		
-		TermsVo vo = MemberDao.getInstance().selectTerms();
+		//전송데이터 수신
+		String hp = req.getParameter("hp");
 		
-		//terms.jsp에 약관 출력해야하므로 
-		req.setAttribute("vo", vo);
+		int count = MemberDao.getInstance().selectCountUserInfo(4, hp);
 		
-		return "/member/terms.jsp";
+		JsonObject json = new JsonObject();
+		json.addProperty("result", count);
+		
+		return "json"+json.toString();
 	}
-	
+
 }
