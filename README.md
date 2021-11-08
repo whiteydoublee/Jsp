@@ -40,8 +40,8 @@ jsp 수업예제
 
 ### Jboard2. JSP JSTL 이용하여 게시판 실습
 > css, js 이용하여 페이지 꾸미기
-> list, modify, view, write, index 페이지 작성 및 각 페이지 연동
-> user 를 이용하여, 로그인 페이지 작성
+> jstl 이용하여 list, modify, view, write, index 페이지 작성 및 각 페이지 연동
+> jstl 이용하여 user 를 이용하여, 로그인 페이지 작성
 
 ### Farmstory2. JSP 이용하여 웹사이트 만들기 실습
 > index, footer, header, user, board 로 나누어 페이지 작성 및 연동
@@ -49,9 +49,9 @@ jsp 수업예제
 > File Upload
 
 ### Farmstory3. JSP JSTL 이용하여 웹사이트 만들기 실습
-> index, footer, header, user, board 로 나누어 페이지 작성 및 연동
-> category 나누기 및 작성된 글 카테고리별로 나눠 업로드
-> File Upload
+> jstl 이용하여 index, footer, header, user, board 로 나누어 페이지 작성 및 연동
+> jstl 이용하여 category 나누기 및 작성된 글 카테고리별로 나눠 업로드
+> jstl 이용하여 File Upload
 
 
 
